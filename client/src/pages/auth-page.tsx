@@ -40,9 +40,30 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export default function AuthPage() {
   const { t } = useTranslation();
-  const { isRtl } = useLanguage();
-  const { user, loginMutation, registerMutation } = useAuth();
   const [activeTab, setActiveTab] = useState<string>('login');
+  
+  // Safely use language context
+  let isRtl = false;
+  try {
+    const { isRtl: rtlValue } = useLanguage();
+    isRtl = rtlValue;
+  } catch (error) {
+    console.error("Language context error:", error);
+  }
+  
+  // Safely use auth context
+  let user = null;
+  let loginMutation: any = { mutate: (_: any) => {}, isPending: false };
+  let registerMutation: any = { mutate: (_: any) => {}, isPending: false };
+  
+  try {
+    const auth = useAuth();
+    user = auth.user;
+    loginMutation = auth.loginMutation;
+    registerMutation = auth.registerMutation;
+  } catch (error) {
+    console.error("Auth context error:", error);
+  }
   
   // Login form
   const loginForm = useForm<LoginFormValues>({

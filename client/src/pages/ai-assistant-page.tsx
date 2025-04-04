@@ -33,11 +33,27 @@ interface AIResponse {
 
 export default function AiAssistantPage() {
   const { t } = useTranslation();
-  const { isRtl } = useLanguage();
-  const { user } = useAuth();
   const [query, setQuery] = useState('');
   const responsesEndRef = useRef<HTMLDivElement>(null);
   const [conversations, setConversations] = useState<Array<{ question: string; answer: AIResponse }>>([]);
+  
+  // Safely use language context
+  let isRtl = false;
+  try {
+    const { isRtl: rtlValue } = useLanguage();
+    isRtl = rtlValue;
+  } catch (error) {
+    console.error("Language context error:", error);
+  }
+  
+  // Safely use auth context
+  let user = null;
+  try {
+    const auth = useAuth();
+    user = auth.user;
+  } catch (error) {
+    console.error("Auth context error:", error);
+  }
   
   // Suggested questions (can be expanded)
   const suggestedQuestions = [

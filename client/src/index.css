@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Lateef:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,5 +11,73 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    background-image: 
+      radial-gradient(rgba(0,0,0,0.015) 1px, transparent 1px),
+      radial-gradient(rgba(0,0,0,0.015) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+
+  /* For Arabic text */
+  .rtl {
+    font-family: 'Noto Sans Arabic', 'Amiri', serif;
+    direction: rtl;
+  }
+}
+
+@layer utilities {
+  /* Islamic geometric pattern divider */
+  .divider-pattern {
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='20' viewBox='0 0 100 20' fill='none'%3E%3Cpath d='M0 10 L100 10' stroke='%23e2e8f0' stroke-width='0.5'/%3E%3Cpath d='M20 5 L20 15 M40 5 L40 15 M60 5 L60 15 M80 5 L80 15' stroke='%23e2e8f0' stroke-width='0.5'/%3E%3Ccircle cx='20' cy='10' r='2' fill='%23CBD5E1'/%3E%3Ccircle cx='40' cy='10' r='2' fill='%23CBD5E1'/%3E%3Ccircle cx='60' cy='10' r='2' fill='%23CBD5E1'/%3E%3Ccircle cx='80' cy='10' r='2' fill='%23CBD5E1'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    margin: 2rem 0;
+  }
+
+  /* Decorative quote container */
+  .islamic-quote {
+    @apply relative px-10 py-8 italic text-gray-700 bg-primary/5 rounded-lg text-center my-4;
+  }
+  
+  .islamic-quote::before,
+  .islamic-quote::after {
+    @apply content-[''] absolute w-8 h-8 border-primary/40;
+  }
+  
+  .islamic-quote::before {
+    @apply border-t-2 border-l-2 top-2 left-2;
+  }
+  
+  .islamic-quote::after {
+    @apply border-b-2 border-r-2 bottom-2 right-2;
+  }
+  
+  /* Custom button styles */
+  .btn-islamic {
+    @apply rounded-md bg-primary text-white py-2 px-5 transition-all duration-300 hover:shadow-md relative overflow-hidden;
+  }
+  
+  .btn-islamic::after {
+    content: '';
+    @apply absolute inset-0 bg-white opacity-0 transition-opacity duration-300;
+  }
+  
+  .btn-islamic:hover::after {
+    @apply opacity-10;
+  }
+
+  /* Custom font for hero sections */
+  .font-islamic-display {
+    font-family: 'PT Serif', 'Amiri', serif;
+  }
+
+  /* Arabic heading style */
+  .heading-arabic {
+    font-family: 'Lateef', 'Amiri', serif;
+    @apply text-2xl font-semibold text-primary/80 text-right rtl;
   }
 }

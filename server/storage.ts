@@ -64,6 +64,9 @@ export interface IStorage {
   
   // Session Store
   sessionStore: session.Store;
+  
+  // Database seeding
+  seedInitialData?(): Promise<void>;
 }
 
 // Memory Storage Implementation
@@ -366,7 +369,7 @@ export class MemStorage implements IStorage {
   }
   
   // Seed Initial Data
-  private seedInitialData() {
+  async seedInitialData(): Promise<void> {
     // Seed categories
     const categories: InsertCategory[] = [
       { name: "Quran Studies", nameAr: "دراسات القرآن", icon: "menu_book", bookCount: 124 },
@@ -465,4 +468,8 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+// Import the DatabaseStorage class
+import { DatabaseStorage } from "./database-storage";
+
+// Use DatabaseStorage instead of MemStorage
+export const storage = new DatabaseStorage();

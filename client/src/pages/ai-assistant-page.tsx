@@ -51,7 +51,7 @@ export default function AiAssistantPage() {
   
   // Fetch user's previous queries if logged in
   const { data: aiQueries } = useQuery<AiQuery[]>({
-    queryKey: ['/api/ai-queries'],
+    queryKey: ['/api/user-ai-queries'],
     enabled: !!user,
   });
   
@@ -68,7 +68,7 @@ export default function AiAssistantPage() {
       
       // If user is logged in, refresh their AI queries
       if (user) {
-        queryClient.invalidateQueries({ queryKey: ['/api/ai-queries'] });
+        queryClient.invalidateQueries({ queryKey: ['/api/user-ai-queries'] });
       }
     },
   });

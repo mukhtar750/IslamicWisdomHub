@@ -1,8 +1,8 @@
 import OpenAI from "openai";
 import { storage } from "./storage";
 
-// Initialize OpenAI with API key
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || "sk-YOUR-OPENAI-API-KEY" });
+// Initialize OpenAI with API key from environment
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
 const OPENAI_MODEL = "gpt-4o";
@@ -82,29 +82,32 @@ export async function getIslamicKnowledgeResponse(
     
     // Store the query and response if user is authenticated
     if (userId) {
-      await storage.createAiQuery({
+      // Create a new query and get its ID
+      const newQuery = await storage.createAiQuery({
         userId,
         query,
         response: JSON.stringify(parsedResponse)
       });
       
-      // Record user activity
+      // Record user activity with the correct query ID
       await storage.createUserActivity({
         userId,
         activityType: "query",
-        aiQueryId: (await storage.getAllCategories()).length
+        aiQueryId: newQuery.id
       });
     }
     
     return parsedResponse;
   } catch (error) {
     console.error("Error in AI assistant:", error);
+    // Detect language again in case the error happened before language was defined
+    const errorLanguage = /[\u0600-\u06FF]/.test(query) ? "ar" : "en";
     return {
-      answer: language === "ar" 
+      answer: errorLanguage === "ar" 
         ? "عذراً، حدث خطأ أثناء معالجة طلبك. يرجى المحاولة مرة أخرى."
         : "Sorry, an error occurred while processing your request. Please try again.",
       references: [],
-      language: language === "ar" ? "ar" : "en"
+      language: errorLanguage
     };
   }
 }

@@ -310,6 +310,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // User AI Queries API (for AI Assistant history)
+  app.get("/api/user-ai-queries", isAuthenticated, async (req, res) => {
+    try {
+      const queries = await storage.getUserAiQueries(req.user!.id);
+      res.json(queries);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching AI queries" });
+    }
+  });
+  
   // User Management API (admin only)
   app.get("/api/users", isAdminOrLibrarian, async (req, res) => {
     try {

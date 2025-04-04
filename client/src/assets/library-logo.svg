@@ -1,0 +1,37 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="60" cy="60" r="60" fill="white"/>
+  <g transform="translate(30, 20)">
+    <!-- Book stack -->
+    <rect x="0" y="15" width="60" height="10" rx="2" fill="#26734D" opacity="0.9"/>
+    <rect x="5" y="25" width="50" height="10" rx="2" fill="#26734D" opacity="0.8"/>
+    <rect x="10" y="35" width="40" height="10" rx="2" fill="#26734D" opacity="0.7"/>
+    <rect x="15" y="45" width="30" height="10" rx="2" fill="#26734D" opacity="0.6"/>
+    
+    <!-- Open book -->
+    <g transform="translate(15, 0)">
+      <!-- Left page -->
+      <path d="M0,0 L15,0 L15,60 C10,55 5,55 0,60 Z" fill="#26734D" opacity="0.9"/>
+      <!-- Right page -->
+      <path d="M15,0 L30,0 L30,60 C25,55 20,55 15,60 Z" fill="#26734D" opacity="0.9"/>
+      <!-- Middle line -->
+      <path d="M15,0 L15,60" stroke="#FFFFFF" stroke-width="1" opacity="0.7"/>
+      
+      <!-- Arabic م character -->
+      <text x="8" y="35" font-family="Amiri, serif" font-size="24" fill="white" text-anchor="middle">م</text>
+      <text x="22" y="35" font-family="Amiri, serif" font-size="24" fill="white" text-anchor="middle">م</text>
+    </g>
+    
+    <!-- Book pages (side view) -->
+    <rect x="0" y="15" width="2" height="10" fill="#F9F6F0" opacity="0.8"/>
+    <rect x="5" y="25" width="2" height="10" fill="#F9F6F0" opacity="0.8"/>
+    <rect x="10" y="35" width="2" height="10" fill="#F9F6F0" opacity="0.8"/>
+    <rect x="15" y="45" width="2" height="10" fill="#F9F6F0" opacity="0.8"/>
+  </g>
+  
+  <!-- Crescent moon inspired element -->
+  <path d="M90,30 A40,40 0 0,1 80,80 A30,30 0 0,0 90,30 Z" fill="#26734D" opacity="0.4"/>
+  
+  <!-- Islamic decoration pattern -->
+  <circle cx="60" cy="60" r="55" stroke="#26734D" stroke-width="1" fill="none" opacity="0.3"/>
+  <circle cx="60" cy="60" r="52" stroke="#26734D" stroke-width="0.5" fill="none" opacity="0.2"/>
+</svg>
